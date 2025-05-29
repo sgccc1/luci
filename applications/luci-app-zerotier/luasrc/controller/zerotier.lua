@@ -1,4 +1,4 @@
-module("luci.controller.zerotier",package.seeall)
+module("luci.controller.zerotier", package.seeall)
 
 function index()
 	if not nixio.fs.access("/etc/config/zerotier") then
@@ -7,8 +7,7 @@ function index()
 
 	entry({"admin", "vpn"}, firstchild(), "VPN", 45).dependent = false
 
-	entry({"admin", "vpn", "zerotier"}, firstchild(), _("ZeroTier")).dependent = false
-
+	entry({"admin", "vpn", "zerotier"}, alias("admin", "vpn", "zerotier", "general"), _("ZeroTier"), 99)
 	entry({"admin", "vpn", "zerotier", "general"}, cbi("zerotier/settings"), _("Base Setting"), 1)
 	entry({"admin", "vpn", "zerotier", "log"}, form("zerotier/info"), _("Interface Info"), 2)
 
